@@ -7,7 +7,7 @@ Installation
 Installing packages
 *******************
 
-We'll assume you have a django CMS (version 3.x) project up and running.
+This version of Aldryn People is compatible with django CMS versions 3.8 through 4.1, and Django versions 3.2 through 5.0. We'll assume you have a compatible django CMS project up and running.
 
 If you need to set up a new django CMS project, follow the instructions in the `django CMS tutorial
 <http://docs.django-cms.org/en/develop/introduction/install.html>`_.

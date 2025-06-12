@@ -2,45 +2,25 @@ language: python
 
 sudo: false
 
+python:
+  - "3.10"
+  - "3.11"
+  - "3.12"
+
 matrix:
   include:
-    # Django 1.11
-    - python: 2.7
-      env: DJANGO='dj111' CMS='cms34'
-    - python: 3.5
-      env: DJANGO='dj111' CMS='cms35'
-    - python: 3.5
-      env: DJANGO='dj111' CMS='cms35' FE='1'
-    - python: 3.5
-      env: DJANGO='dj111' CMS='cms36'
-    - python: 3.5
-      env: DJANGO='dj111' CMS='cms36' FE='1'
-    # Django 2.0
-    - python: 3.5
-      env: DJANGO='dj20' CMS='cms36'
-    - python: 3.5
-      env: DJANGO='dj20' CMS='cms36' FE='1'
-    # Django 2.1
-    - python: 3.5
-      env: DJANGO='dj21' CMS='cms36'
-    - python: 3.5
-      env: DJANGO='dj21' CMS='cms36' FE='1'
-
-before_script:
-  - if [ "$FE" == 1 ]; then nvm install 6 && nvm use 6; fi
-  - if [ "$FE" == 1 ]; then npm config set spin false; fi
-  - if [ "$FE" == 1 ]; then npm install -g gulp@3.9.0; fi
-  - if [ "$FE" == 1 ]; then npm install -g codeclimate-test-reporter; fi
-  - if [ "$FE" == 1 ]; then npm install; fi
+    - python: "3.10"
+      env: PY_VER_TOX=py310
+    - python: "3.11"
+      env: PY_VER_TOX=py311
+    - python: "3.12"
+      env: PY_VER_TOX=py312
 
 install:
   - pip install -U tox coveralls
-  - "if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then export PY_VER=py27; fi"
-  - "if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then export PY_VER=py35; fi"
-  - "if [[ $FE == '1' ]]; then export FE_STR='-fe'; fi"
 
 script:
-  - COMMAND='coverage run' tox -e"$PY_VER-$DJANGO-$CMS$FE_STR",pep8
+  - tox -e "$PY_VER_TOX-django50",flake8
 
 after_success:
   - coveralls

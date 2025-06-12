@@ -4,11 +4,11 @@ from aldryn_people import __version__
 
 
 REQUIREMENTS = [
-    'djangocms-aldryn-common',
+    'djangocms-aldryn-common>=2.0.0',
     'djangocms-aldryn-translation-tools',
     'djangocms-aldryn-search',
-    'django-filer',
-    'easy-thumbnails[svg]',
+    'django-filer>=2.0',
+    'easy-thumbnails[svg]>=2.8',
     'phonenumbers',
 ]
 
@@ -17,16 +17,14 @@ CLASSIFIERS = [
     'Development Status :: 5 - Production/Stable',
     'Environment :: Web Environment',
     'Framework :: Django',
-    'Framework :: Django :: 3.2',
-    'Framework :: Django :: 4.0',
+    'Framework :: Django :: 5.0',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     'Topic :: Software Development',
     'Topic :: Software Development :: Libraries :: Application Frameworks',
@@ -51,6 +49,6 @@ setup(
     long_description_content_type='text/x-rst',
     include_package_data=True,
     zip_safe=False,
-    python_requires='>=3.7',
+    python_requires='>=3.10',
     test_suite="test_settings.run",
 )

@@ -11,6 +11,7 @@ from parler.admin import TranslatableAdmin
 from .models import Group, Person
 
 
+@admin.register(Person)
 class PersonAdmin(PlaceholderAdminMixin,
                   AllTranslationsMixin,
                   TranslatableAdmin):
@@ -63,12 +64,15 @@ class PersonAdmin(PlaceholderAdminMixin,
         qs = qs.annotate(group_count=Count('groups'))
         return qs
 
+    @admin.display(
+        description=_('# Groups'),
+        ordering='group_count',
+    )
     def num_groups(self, obj):
         return obj.group_count
-    num_groups.short_description = _('# Groups')
-    num_groups.admin_order_field = 'group_count'
 
 
+@admin.register(Group)
 class GroupAdmin(PlaceholderAdminMixin,
                  AllTranslationsMixin,
                  TranslatableAdmin):
@@ -96,11 +100,11 @@ class GroupAdmin(PlaceholderAdminMixin,
         qs = qs.annotate(people_count=Count('people'))
         return qs
 
+    @admin.display(
+        description=_('# People'),
+        ordering='people_count',
+    )
     def num_people(self, obj):
         return obj.people_count
-    num_people.short_description = _('# People')
-    num_people.admin_order_field = 'people_count'
 
 
-admin.site.register(Person, PersonAdmin)
-admin.site.register(Group, GroupAdmin)
